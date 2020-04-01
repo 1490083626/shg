@@ -1,0 +1,49 @@
+/**app.wxss**/
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+}
+.fs18 {
+  font-size: 18rpx;
+}
+.fs20 {
+  font-size: 20rpx;
+}
+.fs22 {
+  font-size: 22rpx;
+}
+.fs24 {
+  font-size: 24rpx;
+}
+.fs26 {
+  font-size: 24rpx;
+}
+.fs28 {
+  font-size: 28rpx;
+}
+.fs32 {
+  font-size: 32rpx;
+}
+.fs36 {
+  font-size: 36rpx;
+}
+.red {
+  color: #F54F4A;
+}
+.mgl10 {
+  margin-left: 10rpx;
+}
+.mgl20 {
+  margin-left: 10rpx;
+}
+.mgt10 {
+  margin-top: 10rpx;
+}
+.mgt20 {
+  margin-top: 20rpx;
+}

@@ -1,0 +1,13 @@
+<!--pages/fortest/fortest.wxml-->
+<view>
+  <form>
+    <view>
+      <button type='primary' open-type='getUserInfo' bindgetuserinfo='doLogin'>微信登录</button>
+    </view>
+  </form>
+</view>
+
+<!-- <view> -->
+  <image style='width:800rpx;' src='/images/upload/2019092415204080282.jpg' mode="widthFix"></image>
+<!-- </view> -->
+<image src='/images/hp.jpg'  mode="widthFix"></image>

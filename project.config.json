@@ -1,0 +1,115 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false,
+		"checkInvalidKey": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.8.3",
+	"appid": "wxa7541c433475beb5",
+	"projectname": "shg",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 6,
+			"list": [
+				{
+					"id": -1,
+					"name": "登录",
+					"pathName": "pages/userLogin/login",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "welcome",
+					"pathName": "pages/welcome/welcome",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "首页",
+					"pathName": "pages/shg/shg",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 3,
+					"name": "上传",
+					"pathName": "pages/release/release",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "商品详情",
+					"pathName": "pages/productDetails/productDetails",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "消息",
+					"pathName": "pages/message/message",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "测试",
+					"pathName": "pages/fortest/fortest",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "搜索",
+					"pathName": "pages/search/search",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 8,
+					"name": "我的",
+					"pathName": "pages/my/my",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}

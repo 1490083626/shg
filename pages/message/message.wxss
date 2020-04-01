@@ -1,0 +1,90 @@
+.message-title {
+  position: relative;
+  background-color: #ffffff;
+  height: 100rpx;
+  line-height: 100rpx;
+  padding-left: 20rpx; 
+}
+.message-state {
+  position: absolute;
+  display: inline-block;
+  right: 20rpx;
+}
+Page {
+  background-color: #f1f2f3
+}
+.message-container {
+  min-height: 80rpx;
+  line-height: 80rpx;
+  margin-top: 4rpx;
+  background-color: #ffffff;
+  /* text-align: center; */
+}
+
+.message-item {
+  display: flex;
+  padding: 20rpx;
+  max-height: 140rpx;
+  border-bottom:  solid 2rpx #f1f2f3;
+  
+}
+
+.red-dot {
+  position: absolute;
+  top: 0rpx;
+  right: 40rpx;
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  background-color: red;
+  box-shadow: 6rpx 6rpx 12rpx rgb(228, 143, 143); 
+}
+
+.face-comments {
+  position: relative;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  margin: 5px;
+}
+
+.face-comments image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.message-center {
+  flex: 1;
+}
+
+.message-nickname {
+  height: 64rpx;
+  line-height: 64rpx;
+  font-weight: bold;
+  /* font-size: 32rpx; */
+}
+
+.message-content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 38rpx;
+  width: 510rpx;
+  line-height: 38rpx;
+  font-size: 28rpx;
+  white-space:nowrap;
+}
+.message-time {
+  height: 38rpx;
+  line-height: 60rpx;
+  font-size: 24rpx;
+}
+.message-product-img {
+  padding-top: 10rpx;
+  width: 120rpx;
+  height: 120rpx;
+}
+.message-product-img image{
+  width: 100%;
+  height: 100%;
+}

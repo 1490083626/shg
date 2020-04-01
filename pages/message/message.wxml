@@ -1,0 +1,33 @@
+<!--pages/message/message.wxml-->
+<view class='message-title mgt10'>
+  留言消息
+  <view class="message-state">
+    <text style="text-decoration: {{read ? 'none' : 'underline'}};" bindtap="getUnreadCommnets">未阅</text>
+    <text> | </text>
+    <text bindtap="getReadCommnets" style="text-decoration: {{read ? 'underline' : 'none'}};">已阅</text>
+  </view>
+</view>
+<view class='message-container fs28' wx:for="{{!read ? commentsList : commentsListRead}}" wx:key="{{item.commentId}}">
+  <view wx:if="{{item}}">
+    <view class='message-item' bindtap="toProductDetail" data-productId="{{item.productId}}" data-commentId="{{item.commentId}}">
+      <view class='face-comments'>
+        <image src='{{item.faceImage}}'></image>
+        <!-- <image src='/images/hp.jpg'></image> -->
+        <view class="red-dot" hidden="{{read}}"></view>
+      </view>
+      <view class='message-center'>
+        <!-- <view class='message-nickname'>昵称</view> -->
+        <view class='message-nickname'>{{item.nickname}}</view>
+        <view class='message-content'>{{item.comment}}</view>
+        <!-- <view class='message-content'>你有一条新的消息 你有一条新的消息 你有一条新的消息 你有一条新的消息</view> -->
+        <view class='message-time'>{{item.timeAgoStr}}</view>
+        <!-- <view class='message-time'>1小时前</view> -->
+      </view>
+      <view class='message-product-img'>
+        <image src='{{imgUrl}}{{item.imgAddr}}'></image>
+        <!-- <image src='/images/hp.jpg'></image> -->
+      </view>
+    </view>
+  </view>
+</view>
+<view wx:if="{{!read ? commentsList.length<=0 : commentsListRead.length<=0}}" style="text-align:center;">暂无更多消息</view>

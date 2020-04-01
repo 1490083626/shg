@@ -1,0 +1,24 @@
+.welcome {
+  position: relative;
+}
+.logo,.text,.btn {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.logo {
+  top: 200rpx;
+  width: 100rpx;
+  height: 100rpx;
+}
+.text {
+  top: 510rpx;
+  font-size: 28rpx;
+}
+.btn {
+  top: 600rpx;
+  font-size: 32rpx;
+}
+page {
+  background-color: #DD773E;
+}

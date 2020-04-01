@@ -1,0 +1,92 @@
+<view class='detail-container'>
+  <!-- 用户头像、昵称、区域 -->
+  <view class='top-info'>
+    <view class='user-info'>
+      <view class='user-icon'>
+        <image src='{{currentProduct.owner.avatarUrl}}'></image>
+      </view>
+      <view class='user-nicheng'>
+        <view>{{currentProduct.owner.nickname}}</view>
+        <view class='fs22'>#{{currentProduct.area.areaName}} 发布于 {{timeAgo}}</view>
+      </view>
+    </view>
+    <view class='detail-title'>
+      {{currentProduct.productName}}
+    </view>
+    <view class='price'>
+      <span class='red'>￥{{currentProduct.promotionPrice}}</span>
+      <span wx:if="{{currentProduct.normalPrice}}" class='fs20 mgl10'>原价￥{{currentProduct.normalPrice}}</span>
+    </view>
+  </view>
+  <!-- 商品详情 -->
+  <view class='product-detail mgt20'>
+    <!-- 详情描述 -->
+    <view>
+      <view class='product-detail-header'>商品详情</view>
+      <view class='mgt20 fs24'>{{currentProduct.productDesc}}</view>
+    </view>
+    <!-- 图片 -->
+    <view class='product-imgs mgt20' wx:for="{{currentProduct.productImgList}}" bindtap="previewImage" id="{{currentProduct.productImgList.productImgId}}">
+      <image src='{{imgUrl}}{{item.imgAddr}}' class='mgt10' mode="widthFix"></image>
+    </view>
+    <!-- 浏览量 -->
+    <view class='product-view'>
+      <view class='product-view-img'>
+        <image src='/images/follow.png'></image>
+      </view>
+      <text class='fs24 product-view-text'>{{currentProduct.pageView}}</text>
+    </view>
+  </view>
+  <!-- 卖家信息 -->
+  <view class='product-seller-info mgt20'>
+    <view selectable="true">联系人：{{currentProduct.linkman}}</view>
+    <view wx:if="{{currentProduct.contactPhone}}" selectable="true">电话号码：{{currentProduct.contactPhone}}</view>
+    <view wx:if="{{currentProduct.contactWechat}}" selectable="true">微信：{{currentProduct.contactWechat}}</view>
+  </view>
+  <!-- 留言 -->
+  <view class='message-board mgt20 fs28'>
+    全部留言（{{commentsTotalPage}}）
+  </view>
+  <!-- 固定栏 -->
+  <view class='fixed-bar' wx:if="{{!commentFocus}}">
+    <!-- 分享 -->
+    <button open-type="share" class="share">
+      <cover-image class="size-me share-img" src='../resource/images/share.png' style="">
+      </cover-image>
+    </button>
+    <!-- 收藏 -->
+    <cover-image class="size-me" wx:if="{{isCollect}}" src='/images/collected.png' bindtap='collect'></cover-image>
+    <cover-image class="size-me" wx:else src='/images/CollectOutline.png' bindtap='collect'></cover-image>
+    <!-- 评论按钮 -->
+    <cover-image class="size-me" src='../resource/images/comments.png' bindtap='leaveComment'></cover-image>
+
+    <button bindtap="getWechat" class="fs32 wechat-contact">复制微信</button>
+    <button bindtap="getPhone" class="fs32 phone-contact">电话咨询</button>
+  </view>
+</view>
+
+<view class="say-view">
+  <input name="commentContent" bindblur="inputBlur" class="say-sth" placeholder="{{placeholder}}" confirm-type="send" bindconfirm="saveComment" focus='{{commentFocus}}' value='{{contentValue}}' data-replyFatherCommentId='{{replyFatherCommentId}}' data-replyToUserId='{{replyToUserId}}'
+  />
+</view>
+<block wx:for="{{commentsList}}">
+  <view class='comments-all' bindtap='replyFocus' data-fatherCommentId='{{item.commentId}}' data-toUserId='{{item.fromUserId}}' data-toNickname='{{item.nickname}}'>
+    <view class='container-comments'>
+      <image class="face-comments" src='{{serverUrl}}{{item.faceImage}}'></image>
+      <view class='nickname-comments'>
+        <label class='nickname-lbl'>@{{item.nickname}}</label>
+        于
+        <label class='date-lbl'>{{item.timeAgoStr}}</label>
+        <!-- 留言： -->
+        <block wx:if="{{(item.toNickname != null) && (item.fatherCommentId != null)}}">
+          回复
+          <label class='nickname-lbl'>@{{item.toNickname}}</label>
+        </block>
+        <block wx:else>
+          :<!-- 留言： -->
+        </block>
+      </view>
+    </view>
+    <view class='comments-content'>{{item.comment}}</view>
+  </view>
+</block>

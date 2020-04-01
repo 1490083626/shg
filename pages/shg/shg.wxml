@@ -1,0 +1,87 @@
+<view>
+  <!-- 搜索 -->
+  <navigator url='../search/search'>
+    <view class="weui-search-bar">
+        <view class="weui-search-bar__form">
+            <view class="weui-search-bar__box" bindtap='goToSearch'>
+                <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                
+                  <input  type="text" class="weui-search-bar__input" placeholder="{{searchPlaceHolder}}"  />
+                  <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                      <icon type="clear" size="14"></icon>
+                  </view>
+                
+            </view>
+            <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                <icon class="weui-icon-search" type="search" size="14"></icon>
+                <view class="weui-search-bar__text">{{searchPlaceHolder}}</view>
+            </label>
+        </view>
+        <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+
+    </view>
+  </navigator>
+
+  <!-- 头条轮播 -->
+  <view class="page-section page-section-spacing swiper">
+    <swiper
+      indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="{{circular}}" vertical="{{vertical}}"
+      interval="{{interval}}" duration="{{duration}}" previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px">
+      <block wx:for="{{background}}" wx:key="*this">
+        <swiper-item>
+          <view class="swiper-item {{item}}"></view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+<!-- 分类     -->
+  <view class="page__bd">
+      <view class="weui-grids">
+          <block wx:for="{{grids}}" wx:key="*this">
+              <navigator url="../search/search?cn={{item.categoryName}}&ci={{item.productCategoryId}}" class="weui-grid" hover-class="weui-grid_active">
+                  <image class="weui-grid__icon" src="{{item.url}}" />
+                  <view class="weui-grid__label">{{item.categoryName}}</view>
+              </navigator>
+          </block>
+      </view>
+  </view>
+
+
+<!-- 按钮 -->
+  <view class="weui-flex">
+      <view class="weui-flex__item" bindtap="byTime"><view class="placeholder">最新商品</view></view>
+      <view class="weui-flex__item" bindtap="byComment"><view class="placeholder" bindtap="">热门商品</view></view>
+  </view>
+
+
+
+<!-- 商品列表         -->
+  <view>
+    <view class="weui-panel" wx:for = "{{listProduct}}" data-currentProduct='{{item}}' bindtap='toProductDetail'>
+        <view class="weui-panel__hd">{{item.productName}}</view>
+        <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_text">
+                <view class="weui-media-box__title weui-media-box__title_in-text" >
+                  <!-- <image wx:if="{{imgUrl2}}" src="{imgUrl2}}" style='width:200rxp;height:200rpx;'></image> -->
+                  <!-- <image wx:if="{{imgUrl2}}" src="{{imgUrl2}}" style='width:200rxp;height:200rpx;' ></image>                    -->
+                  <image wx:if="{{imgUrl}}{{item.imgAddr}}" src="{{imgUrl}}{{item.imgAddr}}" style='width:200rpx;' mode="widthFix"></image> 
+
+                </view>
+                <view class="weui-media-box__desc">{{item.productDesc}}</view>
+                <view class="weui-media-box__info">
+                    <view class="weui-media-box__info__meta">{{item.productCategory.productCategoryName}}</view>
+                    <view class="weui-media-box__info__meta">{{item.createTime}}</view>
+                    <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">#{{item.area.areaName}}</view>
+                </view>
+            </view>
+        </view>
+    </view>  
+  </view>
+
+</view>
+
+<!-- top -->
+<view class="top" bindtap="backTop" hidden="{{!backTopValue}}" style="block:{{backTopValue ? none : block}}">
+  <image src="/images/top_01.png"></image>
+</view>

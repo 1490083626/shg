@@ -1,0 +1,11 @@
+/* pages/sumit/sumit.wxss */
+@import "../lib/weui.wxss";
+.big-logos{
+  display: block;
+  /* width: 200rpx; */
+  height:200rpx;
+  border: solid 1px;
+}
+.textarea{
+  border: solid 1px;
+}

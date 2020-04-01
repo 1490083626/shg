@@ -1,0 +1,40 @@
+<!--index.wxml-->
+<view>
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+
+  <view>
+    <view class="my-btn">
+      <button plain="true" bindtap="mySale" style="color:{{!flag ? '#dd773e' : '#000000'}};">我的发布</button>
+      <view class="line1" wx:if="{{!flag}}"></view>
+      <button plain="true" bindtap="myCollect" style="color:{{flag ? '#dd773e' : '#000000'}};">我的收藏</button>
+      <view class="line2" wx:if="{{flag}}"></view>
+    </view>
+  </view>
+
+  <!-- 我的发布内容 -->
+<!-- 商品列表         -->
+  <view>
+    <view class="weui-panel" wx:for = "{{listProduct}}" wx:key="productId" data-currentProduct="{{item}}" bindtap='toProductDetail'>
+        <view class="weui-panel__hd">{{item.productName}}</view>
+        <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_text" bindlongpress="deleteProduct" data-productId="{{item.productId}}">
+                <view class="weui-media-box__title weui-media-box__title_in-text" style="opacity: {{item.enableStatus ? '1' : '0.4'}};">
+                  <image wx:if="{{imgUrl}}{{item.imgAddr}}" src="{{imgUrl}}{{item.imgAddr}}" style='width:200rpx;' mode="widthFix"></image>
+                </view>
+                <view class="weui-media-box__info" wx:if="{{!flag}}">
+                    <button catchtap="sell" data-currentProduct='{{item}}' wx:if="{{item.enableStatus}}">下架</button>
+                    <button catchtap="sell" data-currentProduct='{{item}}' wx:else>上架</button>
+                    <button catchtap="editProduct" data-currentProduct='{{item}}'>编辑</button>
+                </view>
+                <!-- <view wx:else></view> -->
+            </view>
+        </view>
+    </view>  
+  </view>
+</view>

@@ -1,0 +1,47 @@
+/* pages/search/search.wxss */
+@import "../lib/weui.wxss";
+/* 搜索 */
+.searchbar-result{
+    /* margin-top: -100rpx; */
+    font-size: 14px;
+    width: 100%;
+    position: absolute;
+    top: 60rpx;
+
+}
+.searchbar-result .weui-cell__bd{
+  padding: 2px 0 2px 20px;
+  color: #666;
+}
+.searchbar-result:before{
+    display: none;
+}
+.weui-search-bar{
+  background-color: #dd773e;
+  border-top:none;
+
+}
+.weui-cells::after {
+  border-bottom: 0rpx solid #ffffff;
+}
+
+/* 按钮 */
+.button-sp-area{
+    margin: 0 auto;
+    /* padding-top: 5px; */
+    text-align:center;
+}
+.mini-btn {
+  position: relative;
+  top: -10rpx;
+  margin: 0 8px;
+}
+.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.empty image{
+  width: 300rpx;
+  margin-top: 60rpx; 
+}

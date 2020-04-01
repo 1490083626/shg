@@ -1,0 +1,67 @@
+<view>
+     
+  <view class="weui-search-bar">
+      <view class="weui-search-bar__form">
+          <view class="weui-search-bar__box">
+              <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+              <input type="text" class="weui-search-bar__input" placeholder="{{searchPlaceHolder}}" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm="search" />
+              <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                  <icon type="clear" size="14"></icon>
+              </view>
+          </view>
+          <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+              <icon class="weui-icon-search" type="search" size="14"></icon>
+              <view class="weui-search-bar__text">{{searchPlaceHolder}}</view>
+          </label>
+      </view>
+      <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+
+  </view>
+
+  <view class="button-sp-area">
+      <button class="weui-btn mini-btn" type="warn" size="mini" bindtap='byHot'>热度优先</button>
+      <button class="weui-btn mini-btn" type="default" size="mini" bindtap='byTime'>时间优先</button>
+      <button class="weui-btn mini-btn" type="primary" size="mini" bindtap='byComment'>评论优先</button>
+  </view>
+    
+  <view wx:if="{{count > 0}}">
+    <view class="weui-panel" data-currentProduct='{{item}}' bindtap='toProductDetail' wx:for = "{{listProduct}}">
+        <view class="weui-panel__hd">{{item.productName}}</view>
+        <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_text">
+                <view class="weui-media-box__title weui-media-box__title_in-text" >
+                  <!-- <image wx:if="{{imgUrl2}}" src="{imgUrl2}}" style='width:200rxp;height:200rpx;'></image> -->
+                  <!-- <image wx:if="{{imgUrl2}}" src="{{imgUrl2}}" style='width:200rxp;height:200rpx;' ></image>                    -->
+                  <image wx:if="{{imgUrl}}{{item.imgAddr}}" src="{{imgUrl}}{{item.imgAddr}}" style='width:200rxp;height:200rpx;' ></image> 
+
+                </view>
+                <view class="weui-media-box__desc">{{item.productDesc}}</view>
+                <view class="weui-media-box__info">
+                    <view class="weui-media-box__info__meta">{{item.productCategory.productCategoryName}}</view>
+                    <view class="weui-media-box__info__meta">{{item.createTime}}</view>
+                    <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">#{{item.area.areaName}}</view>
+                </view>
+            </view>
+        </view>
+    </view>  
+  </view>
+  <view wx:else class="empty">
+    <image src="/images/empty.png" mode="widthFix"></image>
+  </view>
+
+  <!-- 实时搜索 -->
+  <scroll-view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
+      <!-- <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+          <view class="weui-cell__bd">
+              <view>{{inputVal}}</view>
+          </view>
+      </navigator> -->
+      <view bindtap="changeSearch" class="weui-cell" hover-class="weui-cell_active" wx:for="{{realtimeSearchText}}" data-text="{{item[0]}}">
+          <view class="weui-cell__bd">
+              <!-- <view>实时搜索文本</view> -->
+              <view>{{item[0]}}</view>
+          </view>
+      </view>
+  </scroll-view>  
+
+</view>               

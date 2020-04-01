@@ -1,0 +1,18 @@
+
+<form bindsubmit="formSubmit" id='2' bindreset="formReset">  
+  <input style='display:none' name='program_id' value='{{program_id}}'></input>  
+      <view class='caigou_centent'>描述说明(选填)</view>  
+      <textarea class='textarea' placeholder="" name="content" value='{{formdata}}' />  
+  
+      <view class="big-logos">  
+
+        <view class='weui-uploader__input' bindtap="upimg">???</view>
+        <block wx:for="{{img_arr}}">  
+          <view class='logoinfo' style='width:200rpx;height:200rpx;'>  
+            <image src='{{item}}'></image>  
+          </view>  
+        </block>  
+      </view>  
+      <button class='btn' formType="submit">发布</button>  
+</form> 
+
