@@ -8,8 +8,8 @@
 }
 .logo {
   top: 200rpx;
-  width: 100rpx;
-  height: 100rpx;
+  width: 250rpx;
+  height: 250rpx;
 }
 .text {
   top: 510rpx;

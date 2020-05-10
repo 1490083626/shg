@@ -45,3 +45,16 @@
   width: 300rpx;
   margin-top: 60rpx; 
 }
+.product-center {
+  position: relative;
+}
+.product-center-price {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.product-name {
+  position: absolute;
+  top: 0;
+  left: 40%;
+}

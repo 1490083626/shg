@@ -111,6 +111,7 @@ product-view-img {
 * 评论
 */
 .size-me {
+  position: relative;
   width: 60rpx;
   height: 60rpx;
   margin: 10rpx 16rpx;

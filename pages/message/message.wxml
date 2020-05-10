@@ -2,12 +2,12 @@
 <view class='message-title mgt10'>
   留言消息
   <view class="message-state">
-    <text style="text-decoration: {{read ? 'none' : 'underline'}};" bindtap="getUnreadCommnets">未阅</text>
+    <text style="text-decoration: {{!read ? 'none' : 'underline'}};" bindtap="getUnreadCommnets">未阅</text>
     <text> | </text>
-    <text bindtap="getReadCommnets" style="text-decoration: {{read ? 'underline' : 'none'}};">已阅</text>
+    <text bindtap="getReadCommnets" style="text-decoration: {{!read ? 'underline' : 'none'}};">已阅</text>
   </view>
 </view>
-<view class='message-container fs28' wx:for="{{!read ? commentsList : commentsListRead}}" wx:key="{{item.commentId}}">
+<view class='message-container fs28' wx:for="{{!read ? commentsList : commentsListRead}}" wx:key="commentId">
   <view wx:if="{{item}}">
     <view class='message-item' bindtap="toProductDetail" data-productId="{{item.productId}}" data-commentId="{{item.commentId}}">
       <view class='face-comments'>
@@ -30,4 +30,4 @@
     </view>
   </view>
 </view>
-<view wx:if="{{!read ? commentsList.length<=0 : commentsListRead.length<=0}}" style="text-align:center;">暂无更多消息</view>
+<view wx:if="{{!read ? commentsList.length<=0 : commentsListRead.length<=0}}" style="text-align:center; margin-top: 10rpx;">暂无更多消息</view>

@@ -84,7 +84,7 @@ Page({
       })
     }
   },
-  //注册
+  // 注册
   goRegistPage:function() {
     // wx.redirectTo({
     //   url: '../userRegist/regist',
@@ -102,7 +102,7 @@ Page({
             wx.setStorageSync('userinfo', res.rawData)
             // 可以将 res 发送给后台解码出 unionId
             wx.request({
-              url: 'http://localhost:8080/shg/wechat/login/save',
+              url: app.serverUrl + 'wechat/login/save',
               method: "POST",
               data: res,
               header: {

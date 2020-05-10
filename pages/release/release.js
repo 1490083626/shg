@@ -6,11 +6,11 @@ Page({
     formdata: '',
     codeStr: '', //生成的验证码
     code: '', //输入的验证码
-    files: [],//图片
+    files: [], //图片
     inputValue: '',
     indexArea: 0,
-    indexCategory:0,
-    imgUrl: '../../images/',
+    indexCategory: 0,
+    imgUrl: app.imgUrl,
 
     //表单placeholder
     productName: '',
@@ -29,22 +29,26 @@ Page({
     editProductId: 0
   },
 
-  linkTo:function(){
+  linkTo: function() {
     wx.navigateTo({
       url: '../shg/shg',
     })
   },
 
-  toReleaseNewProduct: function () {
+  toReleaseNewProduct: function() {
     var productId = wx.getStorageSync('editProductId')
     if (productId != null && productId != '') {
       wx.removeStorageSync('editProductId')
+      wx.setStorageSync('isSameEditProductId', false)
     }
     this.setData({
+      // 重置编辑商品id
+      editProductId: 0,
+
       isEdit: false,
       productName: '',
-      listArea: {},
-      listProductCategory: {},
+      // listArea: {},
+      // listProductCategory: {},
       normalPrice: '',
       promotionPrice: '',
       linkman: '',
@@ -56,31 +60,30 @@ Page({
 
   },
 
-  bindPickerChangeArea: function (e) {
+  bindPickerChangeArea: function(e) {
     console.log('AreaPicker发送选择改变，携带值为', e.detail.value)
     this.setData({
       indexArea: e.detail.value
     })
   },
-  bindPickerChangeCategory: function (e) {
+  bindPickerChangeCategory: function(e) {
     console.log('CategoryPicker发送选择改变，携带值为', e.detail.value)
     this.setData({
       indexCategory: e.detail.value
     })
   },
   // 获取区域列表
-  getArea:function(e) {
+  getArea: function(e) {
     var that = this;
     // console.log(e.detail)
     wx.request({
       method: "GET",
-      url: app.serverUrl +"superadmin/listarea",
-      data: {
-      },
+      url: app.serverUrl + "superadmin/listarea",
+      data: {},
       header: {
         'content-type': 'application/json'
       },
-      success: function (res) {
+      success: function(res) {
         // console.log(res.data.rows);
         that.setData({
           listArea: res.data.rows
@@ -98,12 +101,11 @@ Page({
     wx.request({
       method: "GET",
       url: app.serverUrl + "useradmin/getproductcategorylist",
-      data: {
-      },
+      data: {},
       header: {
         'content-type': 'application/json'
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data.data)
         wx.hideLoading()
         that.setData({
@@ -114,7 +116,7 @@ Page({
     })
   },
   //提交表单
-  formSubmit: function (e) {
+  formSubmit: function(e) {
     var that = this;
     console.log('输入的验证码为：' + this.data.code.toUpperCase());
     console.log('实际的验证码为：' + this.data.codeStr.toUpperCase());
@@ -133,6 +135,20 @@ Page({
         duration: 2000
       })
       return
+    } else if (e.detail.value.linkman == '') {
+      wx.showToast({
+        title: '请输入联系人',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    } else if (e.detail.value.contactPhone == '' && e.detail.value.contactPhone == '') {
+      wx.showToast({
+        title: '联系电话、微信至少填一个哦',
+        icon: 'none',
+        duration: 2000
+      })
+      return
     }
     if (this.data.code.toUpperCase() == this.data.codeStr.toUpperCase() && e.detail.value.productName != '') {
       console.log("true");
@@ -147,8 +163,12 @@ Page({
       product.linkman = e.detail.value.linkman;
       product.contactPhone = e.detail.value.contactPhone;
       product.contactWechat = e.detail.value.contactWechat;
-      product.productCategory = { productCategoryId: e.detail.value.productCategoryId};
-      product.area = { areaId: e.detail.value.areaId };
+      product.productCategory = {
+        productCategoryId: e.detail.value.productCategoryId
+      };
+      product.area = {
+        areaId: e.detail.value.areaId
+      };
 
       // 编辑状态上传productId
       var productId = wx.getStorageSync('editProductId')
@@ -156,10 +176,10 @@ Page({
         product.productId = productId
       }
 
-      console.log("productStr", productStr);
-      var productStr = JSON.stringify(product);
+      console.log("productStr", productStr)
+      var productStr = JSON.stringify(product)
 
-      console.log("productStr", productStr);
+      console.log("productStr", productStr)
 
       //开始上传
       this.upload(productStr)
@@ -178,7 +198,7 @@ Page({
   /**
    * 表单上传,向后台提交
    */
-  upload: function (productStrParam) {
+  upload: function(productStrParam) {
     var productStr = productStrParam;
     console.log(productStr);
     var that = this;
@@ -192,7 +212,7 @@ Page({
       return
     }
     var openId = wx.getStorageSync('openid')
-    if(openId == undefined) {
+    if (openId == undefined) {
       console.log('Error, openId id undefined')
     }
     wx.showLoading({
@@ -200,7 +220,7 @@ Page({
     })
 
     var realUrl = '';
-    if(this.data.isEdit) {
+    if (this.data.isEdit) {
       realUrl = 'useradmin/modifyProduction'
     } else {
       realUrl = 'useradmin/uploadProduction'
@@ -210,15 +230,19 @@ Page({
         url: app.serverUrl + realUrl,
         filePath: that.data.imgArr[i],
         name: 'productImg' + i,
-        formData: { 'productStr': productStr, 'imgLength': imgLength, 'openId': openId },
+        formData: {
+          'productStr': productStr,
+          'imgLength': imgLength,
+          'openId': openId
+        },
         header: {
           'content-type': 'application/x-www-form-urlencoded',
           'cookie': wx.getStorageSync("sessionid")
           //读取sessionid,当作cookie传入后台做session_id使用
         },
-        success: function (res) {
+        success: function(res) {
           console.log('uploadResponse', res)
-          if (res.data.success) {
+          if (res.statusCode === 200) {
             wx.hideLoading()
             wx.showModal({
               title: '提示',
@@ -229,14 +253,25 @@ Page({
                   that.setData({
                     formdata: ''
                   })
+                  that.initDraw()
                 } else if (res.cancel) {
                   console.log('用户点击取消')
+                  that.setData({
+                    formdata: ''
+                  })
+                  that.initDraw()
                 }
               }
             })
 
             //更新状态
             that.toReleaseNewProduct()
+          } else {
+            wx.hideLoading()
+            wx.showToast({
+              title: '发布失败',
+              icon: 'none'
+            })
           }
         }
       })
@@ -245,14 +280,14 @@ Page({
   },
 
   //图片上传
-  upimg: function () {
+  upimg: function() {
     var that = this;
     if (this.data.imgArr.length < 5) {
       wx.chooseImage({
-        count: 5,  //最多可以选择的图片总数  
+        count: 5, //最多可以选择的图片总数  
         sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有 
         sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-        success: function (res) {
+        success: function(res) {
           console.log(res.tempFilePaths);
           console.log(that.data.imgArr);
           that.setData({
@@ -270,7 +305,7 @@ Page({
   },
 
   /**预览图片*/
-  previewImage: function (e) {
+  previewImage: function(e) {
     console.log('previewImage', e)
     wx.previewImage({
       current: e.currentTarget.id, // 当前显示图片的http链接
@@ -278,15 +313,15 @@ Page({
     })
   },
   /**图片删除*/
-  deleteImage: function (e) {
+  deleteImage: function(e) {
     var that = this;
     var imgArr = that.data.imgArr;
     var index = e.currentTarget.dataset.index; //获取当前长按图片下标
-    console.log('deleteImage',e)
+    console.log('deleteImage', e)
     wx.showModal({
       title: '提示',
       content: '确定要删除此图片吗？',
-      success: function (res) {
+      success: function(res) {
         if (res.confirm) {
           imgArr.splice(index, 1);
         } else if (res.cancel) {
@@ -298,20 +333,20 @@ Page({
         });
       }
     })
-  },  
+  },
 
   /**
- * 生命周期函数--监听页面加载
- */
-  onLoad: function (options) {
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function(options) {
     var that = this
     console.log('release-options', options)
 
-    //如果是编辑商品则返回该商品数据
+    // 如果是编辑商品则返回该商品数据
     // this.getEditProduct()
 
-    //生成验证码
-    that.initDraw(); 
+    // 生成验证码
+    that.initDraw();
     that.getArea();
     that.getProductCategory();
   },
@@ -319,7 +354,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     console.log('onShow start...')
     // onShow函数会在页面显示时调用，上传图片也会触发该事件，因此，上传图片时记录上一次 editProductId 
     // editProductId相同则则不return， 不同则刷新
@@ -334,14 +369,14 @@ Page({
     } else {
       this.getEditProduct()
     }
-    
+
     console.log('onShow end...')
   },
 
   /**
- * 生命周期函数--监听页面隐藏
- */
-  onHide: function () {
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function() {
     // this.setData({
     //   isEdit: false
     // })
@@ -349,7 +384,7 @@ Page({
     // console.log(this.data.isEdit)
   },
 
-  getEditProduct: function () {
+  getEditProduct: function() {
     var that = this
     var editProductId = wx.getStorageSync('editProductId')
     if (editProductId != null && editProductId != '') {
@@ -367,7 +402,7 @@ Page({
         header: {
           'content-type': 'application/json'
         },
-        success: function (res) {
+        success: function(res) {
           console.log(res.data.product)
           var product = res.data.product
           wx.hideLoading();
@@ -376,10 +411,10 @@ Page({
             var editImgArr = []
             var productImgList = product.productImgList
             for (var item of productImgList) {
-              
+
               editImgArr.push(that.data.imgUrl + item.imgAddr)
             }
-
+            console.log(product.areaId)
             that.setData({
               product: product,
               productName: product.productName,
@@ -427,38 +462,23 @@ Page({
     });
   },
   /**
-  * 更换验证码
-  */
-  changeImg: function () {
+   * 更换验证码
+   */
+  changeImg: function() {
     this.initDraw();
   },
   /**
-  * 图片验证码绑定变量 
-  */
-  bindCode: function (e) {
+   * 图片验证码绑定变量 
+   */
+  bindCode: function(e) {
     this.setData({
       code: e.detail.value
     })
   },
   /**
-   * 点击提交触发
-   */
-  saves: function () {
-    // console.log('输入的验证码为：' + this.data.code);
-    // console.log('实际的验证码为：' + this.data.codeStr);
-    // if (this.data.code == this.data.codeStr) {
-    //   console.log("true");
-    // } else {
-    //   wx.showToast({
-    //     title: '你棒棒哒！！！',
-    //   })
-    //   console.log(false);
-    // }
-  },
-  /**
    * 获取随机数
    */
-  getRanNum: function () {
+  getRanNum: function() {
     var chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
     var pwd = '';
     for (var i = 0; i < 4; i++) {
@@ -467,7 +487,24 @@ Page({
       }
     }
     return pwd;
+  },
+
+  /**
+   * 手机号验证
+   */
+  blurPhone: function(e) {
+    var phone = e.detail.value
+    let that = this
+    if (!(/^1[34578]\d{9}$/.test(phone))) {
+      if (phone.length >= 11) {
+        wx.showToast({
+          title: '手机号有误',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    } else {
+      console.log('验证成功')
+    }
   }
-
-
 })

@@ -10,7 +10,7 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     flag: false, //false：发布状态 ， true：收藏状态
     listProduct: [],
-    imgUrl: '../../images/',
+    imgUrl: app.imgUrl,
   },
   //事件处理函数
   // bindViewTap: function() {

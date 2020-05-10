@@ -1,5 +1,5 @@
 <view class="welcome">
-    <image class="logo" src='../resource/images/dsp.jpg'></image>
+    <image class="logo" src='/images/LOGO.png'></image>
     <text class="text">{{defaultText}}</text>
     <button type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfoTap" class="btn">
     {{defaultButton}}

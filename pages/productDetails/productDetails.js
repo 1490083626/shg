@@ -8,7 +8,7 @@ Page({
   data: {
     currentProduct: {},
     timeAgo: '',
-    imgUrl: '../../images/',
+    imgUrl: app.imgUrl,
 
     commentsList: [],
     placeholder: "说点什么...",
@@ -22,7 +22,10 @@ Page({
     replyToUserId: '',
 
     // 是否已收藏
-    isCollect: false
+    isCollect: false,
+
+    // 富文本
+    nodes: ''
   },
 
   /**
@@ -45,7 +48,8 @@ Page({
         wx.hideLoading()
         that.setData({
           currentProduct: res.data.product,
-          timeAgo: res.data.timeAgo
+          timeAgo: res.data.timeAgo,
+          nodes: res.data.product.productDesc
         })
 
         try {
@@ -73,7 +77,6 @@ Page({
   },
 
   getWechat: function() {
-    console.log('wwwwwwwwwwwwwwwwwwww', wx.getStorageSync('currentProduct').contactWechat)
     var data = wx.getStorageSync('currentProduct').contactWechat
     if(data != undefined && data != null) {
       wx.setClipboardData({
@@ -92,15 +95,9 @@ Page({
         title: '微信不存在哦！',
       })
     }
-
-    // wx.showModal({
-    //   title: '复制微信',
-    //   content: '复制成功！',
-    // })
   },
 
   getPhone: function () {
-    console.log('wwwwwwwwwwwwwwwwwwww', wx.getStorageSync('currentProduct').contactPhone)
     var phone = wx.getStorageSync('currentProduct').contactPhone
     if (phone) {
       wx.makePhoneCall({
@@ -127,6 +124,9 @@ Page({
     })
   },
 
+  /**
+   * 收藏
+   */
   enteringIsCollect: function() {
     var that = this
     var productId = this.data.currentProduct.productId
@@ -221,8 +221,10 @@ Page({
     })
   },
 
+  /**
+   * 回复时focus
+   */
   replyFocus: function(e) {
- 
     var fatherCommentId = e.currentTarget.dataset.fathercommentid
     var toUserId = e.currentTarget.dataset.touserid
     var toNickname = e.currentTarget.dataset.tonickname
@@ -268,7 +270,8 @@ Page({
         url: app.serverUrl + 'useradmin/addComment?fatherCommentId=' + fatherCommentId + "&toUserId=" + toUserId,
         method: 'POST',
         header: {
-          'content-type': 'application/json', // 默认值
+          'content-type': 'application/json', // 默认值 
+          // 'content-type': 'application/x-www-form-urlencoded', 
           // 'headerUserId': user.id,
           // 'headerUserToken': user.userToken
         },
@@ -308,6 +311,19 @@ Page({
 
         var commentsList = res.data.commentsList
         var newCommentsList = that.data.commentsList
+
+        // 选取可用评论
+        // commentsList = commentsList.filter((item, i) => {
+        //   console.log('item', i)
+        //   return item.enableStatus === 1
+        // })
+        commentsList.forEach(item => {
+          if (item.enableStatus === 0) {
+            item.comment = "<该留言已被屏蔽>"
+          }
+        })
+
+        console.log('commentsList::', commentsList)
 
         //用户自己的留言不用回复自己
         for (var item of commentsList) {

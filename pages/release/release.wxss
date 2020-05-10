@@ -64,7 +64,7 @@
 
 .btn button {
   width: 100%;
-  background: #485a8b;
+  background: #DD773E;
   border: none;
   text-align: center;
   color: #fff;

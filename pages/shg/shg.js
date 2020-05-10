@@ -8,7 +8,7 @@ Page({
     //商品列表
     listProduct: [],
     listProductStatus: 0, // 0：默认商品 1：最新商品 2：热门商品
-    imgUrl: '../../images/',
+    imgUrl: app.imgUrl,
 
     searchPlaceHolder: '搜索',
 
@@ -16,32 +16,32 @@ Page({
     grids: [{
         productCategoryId: 1,
         categoryName: '生活用品',
-        url: '../../images/生活用品.png'
+      url: '../../images/l_life.png'
       },
       {
         productCategoryId: 3,
         categoryName: '体育用品',
-        url: '../../images/体育用品.png'
+        url: '../../images/l_play.png'
       },
       {
         productCategoryId: 4,
         categoryName: '电子数码',
-        url: '../../images/电子数码.png'
+        url: '../../images/l_e.png'
       },
       {
         productCategoryId: 5,
         categoryName: '书籍',
-        url: '../../images/书籍.png'
+        url: '../../images/e_book.png'
       },
       {
         productCategoryId: 6,
         categoryName: '衣服饰品',
-        url: '../../images/衣服.png'
+        url: '../../images/l_cloth.png'
       },
       {
         productCategoryId: 7,
         categoryName: '其它',
-        url: '../../images/其它.png'
+        url: '../../images/l_other.png'
       },
     ],
     categoryName: ['生活用品', '体育用品', '电子数码', '书籍', '衣服饰品', '其它'],
@@ -60,18 +60,20 @@ Page({
     productsPage: 1, //页码
     productsTotalPage: 0, //每页的商品数
 
+    // false:最新商品, true:热门商品
+    flag: false,
     // top标签显示（默认不显示）
     backTopValue: false,
 
-    //节流
+    // 节流
     startTime: 0,
-    scrollTop: 0
+    scrollTop: 0,
   },
 
   /**
    * 监听滚动条坐标
    */
-  onPageScroll: tool.throttle(function (args) {
+  onPageScroll: tool.throttle(function(args) {
     // console.log(args)
     var scrollTop = args[0].scrollTop
     var backTopValue = scrollTop > 1800 ? true : false
@@ -85,7 +87,7 @@ Page({
   /**
    * 滚动到顶部
    */
-  backTop: function () {
+  backTop: function() {
     this.setData({
       backTopValue: false
     })
@@ -111,8 +113,11 @@ Page({
    * 获取商品列表
    * page: 页码
    */
-  getProductList: function (pageIndex) {
+  getProductList: function(pageIndex) {
     var that = this
+    wx.showLoading({
+      title: '请稍等...',
+    })
     wx.request({
       method: "GET",
       url: app.serverUrl + 'useradmin/getproductlist?pageIndex=' + pageIndex + '&pageSize=10',
@@ -120,7 +125,7 @@ Page({
       header: {
         'content-type': 'application/json'
       },
-      success: function (res) {
+      success: function(res) {
         var productList = res.data.productList
         var newproductList = that.data.listProduct
         console.log(res);
@@ -144,11 +149,14 @@ Page({
   },
 
   /**
-   * 最新商品
+   * 获取最新商品
    */
-  byTime: function (args) {
+  byTime: function(args) {
+    this.setData({
+      flag: false
+    })
     console.log(args)
-    if (typeof (args) === "object") {
+    if (typeof(args) === "object") {
       var pageIndex = 1
     } else {
       var pageIndex = args
@@ -162,12 +170,11 @@ Page({
     wx.request({
       method: "GET",
       url: app.serverUrl + "frontend/listproductsbytime?pageIndex=" + pageIndex + "&pageSize=10",
-      data: {
-      },
+      data: {},
       header: {
         'content-type': 'application/json'
       },
-      success: function (res) {
+      success: function(res) {
         // 初始化
         if (that.data.listProductStatus != 1) {
           that.setData({
@@ -199,8 +206,11 @@ Page({
   /**
    * 按热度
    */
-  byComment: function (args) {
-    if (typeof (args) === "object") {
+  byComment: function(args) {
+    this.setData({
+      flag: true
+    })
+    if (typeof(args) === "object") {
       var pageIndex = 1
     } else {
       var pageIndex = args
@@ -215,12 +225,11 @@ Page({
     wx.request({
       method: "GET",
       url: app.serverUrl + "frontend/listproductsbycomment?pageIndex=" + pageIndex + "&pageSize=10",
-      data: {
-      },
+      data: {},
       header: {
         'content-type': 'application/json'
       },
-      success: function (res) {
+      success: function(res) {
         // 初始化
         if (that.data.listProductStatus != 2) {
           that.setData({
@@ -247,7 +256,7 @@ Page({
         }
       }
     })
-  }, 
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -264,32 +273,12 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
 
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -308,7 +297,7 @@ Page({
       return
     }
     var page = currentPage + 1
-  
+
     switch (this.data.listProductStatus) {
       case 1:
         this.byTime(page)
@@ -319,7 +308,6 @@ Page({
       default:
         this.getProductList(page)
     }
-    
   },
 
   /**

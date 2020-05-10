@@ -10,7 +10,7 @@ Page({
     listProduct:[],
     count: 0,
     // imgUrl:'https://wudiling.cn/pic.png'
-    imgUrl: '../../images/',
+    imgUrl: app.imgUrl,
     // imgUrl2:'upload/item/user/1/2019092415204080282.jpg',
     imgUrl3: '../../images/upload/item/user/1/2019092415204080282.jpg',
     realtimeSearchText: [],
@@ -144,7 +144,7 @@ Page({
 
           that.setData({
             listProduct: res.data.productList,
-            count: re.data.count
+            count: res.data.count
           })
 
         }

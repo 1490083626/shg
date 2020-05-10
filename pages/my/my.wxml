@@ -21,6 +21,7 @@
 <!-- 商品列表         -->
   <view>
     <view class="weui-panel" wx:for = "{{listProduct}}" wx:key="productId" data-currentProduct="{{item}}" bindtap='toProductDetail'>
+        <!-- 商品名称 -->
         <view class="weui-panel__hd">{{item.productName}}</view>
         <view class="weui-panel__bd">
             <view class="weui-media-box weui-media-box_text" bindlongpress="deleteProduct" data-productId="{{item.productId}}">

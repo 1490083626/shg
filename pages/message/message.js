@@ -8,7 +8,7 @@ Page({
   data: {
     commentsList: {},
     commentsListRead: {},
-    imgUrl: '../../images/',
+    imgUrl: app.imgUrl,
     read: false
   },
 
@@ -59,6 +59,13 @@ Page({
         console.log(res.data)
         wx.hideLoading()
         var commentsList = res.data.commentsList
+        if (!commentsList) return
+        commentsList.forEach(item => {
+          if (item.enableStatus === 0) {
+            item.comment = "<该留言已被屏蔽>"
+          }
+        })
+
         that.setData({
           commentsList: commentsList
         })
@@ -83,10 +90,23 @@ Page({
       success: function (res) {
         wx.hideLoading()
         console.log(res.data)
-        var commentsList = res.data.commentsList
-        that.setData({
-          commentsListRead: commentsList
-        })
+        if(res.data.success) {
+          var commentsList = res.data.commentsList
+          commentsList.forEach(item => {
+            if (item.enableStatus === 0) {
+              item.comment = "<该留言已被屏蔽>"
+            }
+          })
+          that.setData({
+            commentsListRead: commentsList
+          })
+        } else {
+          wx.showToast({
+            title: '请求失败',
+            icon: 'none'
+          })
+        }
+
       }
     })
   },

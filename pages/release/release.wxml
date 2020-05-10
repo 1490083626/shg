@@ -1,145 +1,137 @@
 <!--pages/test/test.wxml-->
-
-
-<!-- <button bindtap='toGet'>请求地区</button> -->
-
 <form bindsubmit='formSubmit'>
-
   <view class="weui-cell ">
-      <view class="weui-cell__hd">
-          <view class="weui-label">商品名称<text class="red">*</text></view>
+    <view class="weui-cell__hd">
+      <view class="weui-label">商品名称
+        <text class="red">*</text>
       </view>
-      <view class="weui-cell__bd">
-          <input class="weui-input" name="productName" placeholder="请输入商品名称" value="{{productName}}"/>
-      </view>
+    </view>
+    <view class="weui-cell__bd">
+      <input class="weui-input" name="productName" placeholder="请输入商品名称" value="{{productName}}" />
+    </view>
   </view>
 
   <view class="weui-cell ">
-      <view class="weui-cell__hd">
-          <view class="weui-label">区域<text class="red">*</text></view>
+    <view class="weui-cell__hd">
+      <view class="weui-label">区域
+        <text class="red">*</text>
       </view>
-      <view class="weui-cell__bd">
-        <picker bindchange="bindPickerChangeArea" value="{{listArea[indexArea].areaId}}" name="areaId" range="{{listArea}}" range-key="{{'areaName'}}">
-          <view class="picker">
-            当前选择：{{listArea[indexArea].areaName}}
-          </view>
-        </picker>
-      </view>
-  </view>  
-
-  <view class="weui-cell ">
-      <view class="weui-cell__hd">
-          <view class="weui-label">分类<text class="red">*</text></view>
-      </view>
-      <view class="weui-cell__bd">
-        <picker bindchange="bindPickerChangeCategory" value="{{listProductCategory[indexCategory].productCategoryId}}" name="productCategoryId" range="{{listProductCategory}}" range-key="{{'productCategoryName'}}">
-          <view class="picker">
-            当前选择：{{listProductCategory[indexCategory].productCategoryName}}
-          </view>
-        </picker>
-      </view>
-  </view>    
-
-  <!-- <view class="weui-cell ">
-      <view class="weui-cell__hd">
-          <view class="weui-label">优先级</view>
-      </view>
-      <view class="weui-cell__bd">
-          <input class="weui-input" name="priority" placeholder="请输入优先级"/>
-      </view>
-  </view> -->
-  <view class="weui-cell ">
-      <view class="weui-cell__hd">
-          <view class="weui-label">原价￥</view>
-      </view>
-      <view class="weui-cell__bd">
-          <input class="weui-input" name="normalPrice" placeholder="请输入原价" value="{{normalPrice}}"/>
-      </view>
-  </view>
-  <view class="weui-cell ">
-      <view class="weui-cell__hd">
-          <view class="weui-label">现价￥<text class="red">*</text></view>
-      </view>
-      <view class="weui-cell__bd">
-          <input class="weui-input" name="promotionPrice" placeholder="请输入现价" value="{{promotionPrice}}"/>
-      </view>
+    </view>
+    <view class="weui-cell__bd">
+      <picker bindchange="bindPickerChangeArea" value="{{listArea[indexArea].areaId}}" name="areaId" range="{{listArea}}" range-key="{{'areaName'}}">
+        <view class="picker">
+          当前选择：{{listArea[indexArea].areaName}}
+        </view>
+      </picker>
+    </view>
   </view>
 
   <view class="weui-cell ">
-      <view class="weui-cell__hd">
-          <view class="weui-label">联系人</view>
+    <view class="weui-cell__hd">
+      <view class="weui-label">分类
+        <text class="red">*</text>
       </view>
-      <view class="weui-cell__bd">
-          <input class="weui-input" name="linkman" placeholder="请输入联系人" value="{{linkman}}"/>
+    </view>
+    <view class="weui-cell__bd">
+      <picker bindchange="bindPickerChangeCategory" value="{{listProductCategory[indexCategory].productCategoryId}}" name="productCategoryId" range="{{listProductCategory}}" range-key="{{'productCategoryName'}}">
+        <view class="picker">
+          当前选择：{{listProductCategory[indexCategory].productCategoryName}}
+        </view>
+      </picker>
+    </view>
+  </view>
+  <view class="weui-cell ">
+    <view class="weui-cell__hd">
+      <view class="weui-label">原价￥</view>
+    </view>
+    <view class="weui-cell__bd">
+      <input class="weui-input" name="normalPrice" type="number" placeholder="请输入原价" value="{{normalPrice}}" />
+    </view>
+  </view>
+  <view class="weui-cell ">
+    <view class="weui-cell__hd">
+      <view class="weui-label">现价￥
+        <text class="red">*</text>
       </view>
+    </view>
+    <view class="weui-cell__bd">
+      <input class="weui-input" name="promotionPrice" type="number" placeholder="请输入现价" value="{{promotionPrice}}" />
+    </view>
   </view>
 
   <view class="weui-cell ">
-      <view class="weui-cell__hd">
-          <view class="weui-label">联系电话</view>
+    <view class="weui-cell__hd">
+      <view class="weui-label">联系人
+        <text class="red">*</text>
       </view>
-      <view class="weui-cell__bd">
-          <input class="weui-input" name="contactPhone" placeholder="请输入联系电话" value="{{contactPhone}}"/>
-      </view>
+    </view>
+    <view class="weui-cell__bd">
+      <input class="weui-input" name="linkman" placeholder="请输入联系人" value="{{linkman}}" />
+    </view>
   </view>
 
   <view class="weui-cell ">
-      <view class="weui-cell__hd">
-          <view class="weui-label">联系人微信</view>
+    <view class="weui-cell__hd">
+      <view class="weui-label">联系电话
+        <text class="red">*</text>
       </view>
-      <view class="weui-cell__bd">
-          <input class="weui-input" name="contactWechat" placeholder="请输入微信" value="{{contactWechat}}"/>
+    </view>
+    <view class="weui-cell__bd">
+      <input class="weui-input" name="contactPhone" type="number" maxlength="11" bindinput='blurPhone' placeholder="请输入联系电话" value="{{contactPhone}}" />
+    </view>
+  </view>
+
+  <view class="weui-cell ">
+    <view class="weui-cell__hd">
+      <view class="weui-label">联系人微信
+        <text class="red">*</text>
       </view>
+    </view>
+    <view class="weui-cell__bd">
+      <input class="weui-input" name="contactWechat" placeholder="请输入微信" value="{{contactWechat}}" />
+    </view>
   </view>
   <!-- <view class="weui-cell ">
     <view class="weui-cells__tips"><view class="red">微信与电话至少填一个哦</view></view>
   </view> -->
   <view class="weui-cells weui-cells_after-title">
-      <view class="weui-cell">
-          <view class="weui-cell__bd">
-              <textarea class="weui-textarea" name="productDesc" value="{{productDesc}}" placeholder="商品描述" style="height: 3.3em" />
-              <view class="weui-textarea-counter">0/200</view>
-          </view>
-      </view>
-  </view>
-
-<!-- 图片 -->
-  <view class="weui-uploader">
-      <view class="weui-uploader__hd">
-      <view class="weui-uploader__title" style='margin-left:24rpx;'>图片上传<text class="red">*</text></view>
-        <view class="weui-uploader__overview">
-            <!-- <view class="weui-uploader__title">图片上传</view> -->
-            <!-- <view class="weui-label">图片上传</view> -->
-            <view class="weui-uploader__info" style='margin-right:24rpx;'>{{imgArr.length}}/5</view>
-        </view>
-      </view>
-
-      <view class="weui-uploader__bd" style="margin-left:24rpx;">
-          <view class="weui-uploader__files" id="uploaderFiles">
-              <block wx:for="{{imgArr}}" wx:key="*this">
-                  <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}" bindlongpress="deleteImage" data-index="{{index}}">
-                      <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
-                  </view>
-              </block>
-          </view>
-          <view class="weui-uploader__input-box">
-              <view class="weui-uploader__input" bindtap="upimg"></view>
-          </view>
-      </view>
-  </view>
-<!--   
-  <view class="weui-cell ">
-      <view class="weui-cell__hd">
-          <view class="weui-label">详情图</view>
-      </view>
+    <view class="weui-cell">
       <view class="weui-cell__bd">
-          <input class="weui-input" name="priority" placeholder="请输入详情图"/>
+        <textarea class="weui-textarea" name="productDesc" value="{{productDesc}}" placeholder="商品描述" style="height: 4em" />
+        <view class="weui-textarea-counter mgl20">0/200</view>
       </view>
-  </view> -->
+    </view>
+  </view>
 
+  <!-- 图片 -->
+  <view class="weui-uploader">
+    <view class="weui-uploader__hd">
+      <view class="weui-uploader__title" style='margin-left:24rpx;'>图片上传
+        <text class="red">*</text>
+      </view>
+      <view class="weui-uploader__overview">
+        <!-- <view class="weui-uploader__title">图片上传</view> -->
+        <!-- <view class="weui-label">图片上传</view> -->
+        <view class="weui-uploader__info" style='margin-right:24rpx;'>{{imgArr.length}}/5</view>
+      </view>
+    </view>
+
+    <view class="weui-uploader__bd" style="margin-left:24rpx;">
+      <view class="weui-uploader__files" id="uploaderFiles">
+        <block wx:for="{{imgArr}}" wx:key="*this">
+          <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}" bindlongpress="deleteImage" data-index="{{index}}">
+            <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+          </view>
+        </block>
+      </view>
+      <view class="weui-uploader__input-box">
+        <view class="weui-uploader__input" bindtap="upimg"></view>
+      </view>
+    </view>
+  </view>
   <!-- <view class="weui-cells__title">文本域</view> -->
 
-<!-- 验证码 -->
+  <!-- 验证码 -->
   <view class='member_main input_center'>
     <view class='center_left'>
       <input placeholder-class="phcolor" type='text' class="weui-input" maxlength="4" placeholder='请输入验证码' value='{{code}}' name="code" bindinput='bindCode' />
@@ -149,36 +141,27 @@
     </view>
     <view class="changeImg" bindtap="changeImg">换一换</view>
   </view>
-  
-  <!-- <view class='btn'>
-    <button catchtap='saves'>提交</button>
-  </view> -->
-
   <view class='btn'>
-    <button form-type='submit' wx:if="{{!isEdit}}">提交</button>
-    <button form-type='submit' wx:else>更改</button>
+    <button form-type='submit' wx:if="{{!isEdit}}" class="mgb20">提交</button>
+    <button form-type='submit' wx:else class="mgb20">更改</button>
     <br/>
-    <button bindtap="toReleaseNewProduct" wx:if="{{isEdit}}">取消</button>
+    <button bindtap="toReleaseNewProduct" class="mgb20" wx:if="{{isEdit}}">取消</button>
   </view>
-
 </form>
 
-        <!-- <view class="weui-cells__tips">底部说明文字底部说明文字</view> -->
+<!-- <view class="weui-cells__tips">底部说明文字底部说明文字</view> -->
 
-        <!-- <view class="weui-cells__title">表单报错</view>
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell  weui-cell_warn">
-              <view class="weui-cell__hd">
-                  <view class="weui-label">卡号</view>
-              </view>
-              <view class="weui-cell__bd">
-                  <input class="weui-input" placeholder="请输入卡号"/>
-              </view>
-              <view class="weui-cell__ft">
-                  <icon type="warn" size="23" color="#E64340"></icon>
-              </view>
-          </view>
-        </view> -->
-
-
-    <button bindtap='linkTo'>跳转</button>    
+<!-- <view class="weui-cells__title">表单报错</view>
+<view class="weui-cells weui-cells_after-title">
+  <view class="weui-cell  weui-cell_warn">
+    <view class="weui-cell__hd">
+      <view class="weui-label">卡号</view>
+    </view>
+    <view class="weui-cell__bd">
+      <input class="weui-input" placeholder="请输入卡号" />
+    </view>
+    <view class="weui-cell__ft">
+      <icon type="warn" size="23" color="#E64340"></icon>
+    </view>
+  </view>
+</view> -->
