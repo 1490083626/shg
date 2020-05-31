@@ -203,7 +203,6 @@ Page({
     console.log(productStr);
     var that = this;
     var imgLength = this.data.imgArr.length;
-
     if (imgLength <= 0) {
       wx.showToast({
         icon: 'none',
@@ -241,6 +240,7 @@ Page({
           //读取sessionid,当作cookie传入后台做session_id使用
         },
         success: function(res) {
+
           console.log('uploadResponse', res)
           if (res.statusCode === 200) {
             wx.hideLoading()
@@ -251,13 +251,15 @@ Page({
                 if (res.confirm) {
                   console.log('用户点击确定')
                   that.setData({
-                    formdata: ''
+                    formdata: '',
+                    code: ''
                   })
                   that.initDraw()
                 } else if (res.cancel) {
                   console.log('用户点击取消')
                   that.setData({
-                    formdata: ''
+                    formdata: '',
+                    code: ''
                   })
                   that.initDraw()
                 }
@@ -357,7 +359,7 @@ Page({
   onShow: function() {
     console.log('onShow start...')
     // onShow函数会在页面显示时调用，上传图片也会触发该事件，因此，上传图片时记录上一次 editProductId 
-    // editProductId相同则则不return， 不同则刷新
+    // editProductId相同则不return， 不同则刷新
     var editProductId = wx.getStorageSync('editProductId')
     if (editProductId === this.data.editProductId) return
     this.setData({

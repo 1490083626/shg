@@ -57,5 +57,8 @@ App({
     return openId
   },
   // serverUrl: 'https://wudiling.cn'
-  serverUrl: 'http://localhost:8080/shg/'
+  serverUrl: 'http://120.25.235.30/shg/',
+  imgUrl: 'http://120.25.235.30/'
+  // serverUrl: 'http://localhost:8080/shg/'
+  
 })

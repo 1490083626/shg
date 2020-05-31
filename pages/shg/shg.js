@@ -268,7 +268,7 @@ Page({
     var that = this;
     if (options) {
       // 初始化商品列表
-      that.getProductList(1)
+      that.byTime(1)
     }
   },
 

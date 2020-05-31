@@ -76,3 +76,6 @@ canvas {
   width: 300rpx;
   height: 80rpx;
 }
+.weui-uploader__hd {
+  padding: 10rpx;
+}

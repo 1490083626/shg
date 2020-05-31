@@ -46,7 +46,7 @@ Page({
           success: res => {
             res.code = loginRes.code
             console.log('userinfo', res.rawData)
-            //保存用户信息
+            // 保存用户信息
             wx.setStorageSync('userinfo', res.rawData)
             // 可以将 res 发送给后台解码出 unionId
             wx.request({

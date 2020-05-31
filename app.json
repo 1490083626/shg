@@ -1,18 +1,11 @@
 {
   "pages": [
+    "pages/welcome/welcome",
     "pages/my/my",
-    "pages/fortest/fortest",
     "pages/shg/shg",
     "pages/release/release",
     "pages/search/search",
-    "pages/userRegist/regist",
-    "pages/userLogin/login",
-    "pages/sumit/sumit",
-    "pages/captcha/captcha",
-    "pages/input/input",
-    "pages/logs/logs",
     "pages/publicInterest/publicInterest",
-    "pages/welcome/welcome",
     "pages/productDetails/productDetails",
     "pages/message/message"
   ],
@@ -23,39 +16,33 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "color": "#000000",
+    "color": "#808080",
     "selectedColor": "#dd773e",
     "backgroundColor": "#ffffff",
     "list": [
       {
         "pagePath": "pages/shg/shg",
         "text": "首页",
-        "iconPath": "/images/首页.png",
-        "selectedIconPath": "/images/首页ed.png"
-      },
-      {
-        "pagePath": "pages/publicInterest/publicInterest",
-        "text": "公益",
-        "iconPath": "/images/公益.png",
-        "selectedIconPath": "/images/公益ed.png"
+        "iconPath": "/images/home.png",
+        "selectedIconPath": "/images/homed.png"
       },
       {
         "pagePath": "pages/release/release",
         "text": "发布",
-        "iconPath": "/images/发布.png",
-        "selectedIconPath": "/images/发布ed.png"
+        "iconPath": "/images/add.png",
+        "selectedIconPath": "/images/added.png"
       },
       {
         "pagePath": "pages/message/message",
         "text": "消息",
-        "iconPath": "/images/消息.png",
-        "selectedIconPath": "/images/消息ed.png"
+        "iconPath": "/images/message.png",
+        "selectedIconPath": "/images/messaged.png"
       },
       {
         "pagePath": "pages/my/my",
         "text": "我的",
-        "iconPath": "/images/我 的.png",
-        "selectedIconPath": "/images/我 的ed.png"
+        "iconPath": "/images/my.png",
+        "selectedIconPath": "/images/myed.png"
       }
     ]
   },

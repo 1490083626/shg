@@ -39,11 +39,20 @@
   margin-left: 10rpx;
 }
 .mgl20 {
-  margin-left: 10rpx;
+  margin-left: 20rpx;
 }
 .mgt10 {
   margin-top: 10rpx;
 }
 .mgt20 {
   margin-top: 20rpx;
+}
+.mgr10 {
+  margin-top: 10rpx;
+}
+.mgr20 {
+  margin-top: 20rpx;
+}
+.mgb20 {
+  margin-bottom: 20rpx;
 }

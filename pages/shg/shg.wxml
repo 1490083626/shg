@@ -83,7 +83,7 @@
           <!-- <view class="weui-media-box__desc">{{item.productDesc}}</view> -->
           <view class="weui-media-box__info">
             <view class="weui-media-box__info__meta">{{item.productCategory.productCategoryName}}</view>
-            <view class="weui-media-box__info__meta">{{item.createTime}}</view>
+            <view class="weui-media-box__info__meta">{{item.lastEditTime}}</view>
             <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">#{{item.area.areaName}}</view>
           </view>
         </view>
