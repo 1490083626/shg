@@ -2,7 +2,7 @@
 
 欢迎页
 
-![欢迎界面](E:\wxWork\shg\readmeFiles\欢迎界面.png)
+![欢迎界面](https://s1.ax1x.com/2020/06/04/tBwaR0.png)
 
 首页
 
